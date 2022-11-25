@@ -1,15 +1,27 @@
-import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
+import express from 'express'
+import { connect } from 'mongoose'
+
+import { CardsRouter, HomeRouter } from './routes'
 
 dotenv.config()
+
+connect(
+	`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@petsupplies.thsr3db.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
+)
+	.then(() => {
+		console.log('[Server]: DB connected')
+	})
+	.catch(err => {
+		console.error('[Server]: DB error connect', err)
+	})
 
 const app = express()
 const port = process.env.PORT
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('All good1')
-})
+app.use(HomeRouter)
+app.use(CardsRouter)
 
 app.listen(port, () => {
-	console.log(`[server]: Server is running at https://localhost:${port}`)
+	console.log(`[Server]: Server is running at https://localhost:${port}`)
 })
