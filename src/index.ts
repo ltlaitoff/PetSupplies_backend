@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import { connect } from 'mongoose'
 
-import { CardsRouter, HomeRouter } from './routes'
+import { CardsRouter, HomeRouter, ProductRouter } from './routes'
 
 dotenv.config()
 
@@ -20,6 +20,7 @@ const app = express()
 const port = process.env.PORT
 
 app.use(HomeRouter)
+app.use(ProductRouter)
 app.use(CardsRouter)
 
 app.listen(port, () => {

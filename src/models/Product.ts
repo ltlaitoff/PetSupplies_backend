@@ -5,8 +5,14 @@ import { Category, Producer, ProductsAllInfo, Type, User } from '.'
 
 const productSchema = new Schema(
 	{
-		title: String,
-		description: String,
+		title: {
+			en: String,
+			ua: String,
+		},
+		description: {
+			en: String,
+			ua: String,
+		},
 		price: Number,
 		stars: Number,
 		image: { type: Buffer, contentType: String },

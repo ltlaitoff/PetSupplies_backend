@@ -6,7 +6,7 @@ const productsAllInfoSchema = new Schema(
 	{
 		description: String,
 		characteristics: String,
-		reviews: { type: Schema.Types.ObjectId, ref: Review },
+		reviews: { type: [Schema.Types.ObjectId], ref: Review },
 	},
 	{
 		timestamps: true,
