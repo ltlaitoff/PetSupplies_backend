@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import { connect } from 'mongoose'
+import cors from 'cors'
 
 import { CardsRouter, HomeRouter, ProductRouter } from './routes'
 
@@ -18,6 +19,8 @@ connect(
 
 const app = express()
 const port = process.env.PORT
+
+app.use(cors())
 
 app.use(HomeRouter)
 app.use(ProductRouter)
