@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 import { AccountLevel } from './AccountLevel'
 
