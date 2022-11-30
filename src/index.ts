@@ -10,6 +10,7 @@ import { CategoriesRouter } from './routes/categories'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import { TypesRouter } from './routes/types'
+import { ProducerRouter } from './routes/producers'
 
 console.log(new mongoose.Types.ObjectId('638387eb6f33fac689be5e82'))
 
@@ -56,6 +57,7 @@ app.use(ProductRouter)
 app.use(CardsRouter)
 app.use(CategoriesRouter)
 app.use(TypesRouter)
+app.use(ProducerRouter)
 
 app.listen(port, () => {
 	console.log(`[Server]: Server is running at http://localhost:${port}`)
