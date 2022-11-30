@@ -1,0 +1,5 @@
+export { createNewType } from './createNewType'
+export { getType } from './getType'
+export { deleteType } from './deleteType'
+export { updateType } from './updateType'
+export { getAllTypes } from './getAllTypes'
