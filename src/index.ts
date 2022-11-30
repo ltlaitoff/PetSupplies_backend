@@ -1,9 +1,16 @@
 import dotenv from 'dotenv'
 import express from 'express'
-import { connect } from 'mongoose'
+import { connect, mongo } from 'mongoose'
 import cors from 'cors'
+import swaggerUI from 'swagger-ui-express'
+import swaggerJsDoc from 'swagger-jsdoc'
 
 import { CardsRouter, HomeRouter, ProductRouter } from './routes'
+import { CategoriesRouter } from './routes/categories'
+import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+
+console.log(new mongoose.Types.ObjectId('638387eb6f33fac689be5e82'))
 
 dotenv.config()
 
@@ -22,10 +29,32 @@ const port = process.env.PORT
 
 app.use(cors())
 
+const options = {
+	failOnErrors: true,
+	definition: {
+		openapi: '3.0.0',
+		info: {
+			title: 'PetSupplies API',
+			version: '0.0.0',
+			description: 'PetSupplies API description',
+			servers: [`http://localhost:${port}`],
+		},
+	},
+	apis: ['./src/routes/*.ts'],
+}
+
+const openapiSpecification = swaggerJsDoc(options)
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(openapiSpecification))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(HomeRouter)
 app.use(ProductRouter)
 app.use(CardsRouter)
+app.use(CategoriesRouter)
 
 app.listen(port, () => {
-	console.log(`[Server]: Server is running at https://localhost:${port}`)
+	console.log(`[Server]: Server is running at http://localhost:${port}`)
 })
