@@ -5,13 +5,12 @@ import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
 
-import { CardsRouter, HomeRouter, ProductRouter } from './routes'
+import { HomeRouter, AccountLevelRouter } from './routes'
 import { CategoriesRouter } from './routes/categories'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import { TypesRouter } from './routes/types'
 import { ProducerRouter } from './routes/producers'
-import { AccountLevelRouter } from './routes/accountLevel'
 
 console.log(new mongoose.Types.ObjectId('638387eb6f33fac689be5e82'))
 
@@ -43,7 +42,7 @@ const options = {
 			servers: [`http://localhost:${port}`],
 		},
 	},
-	apis: ['./src/routes/*.ts'],
+	apis: ['./src/routes/*.ts', './src/swagger/*.yaml'],
 }
 
 const openapiSpecification = swaggerJsDoc(options)
@@ -54,8 +53,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(HomeRouter)
-app.use(ProductRouter)
-app.use(CardsRouter)
 app.use(CategoriesRouter)
 app.use(TypesRouter)
 app.use(ProducerRouter)
