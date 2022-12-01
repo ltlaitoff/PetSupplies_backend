@@ -1,0 +1,279 @@
+components:
+  schemas:
+    StandartErrorMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 'error'
+          description: Status of query
+        message:
+          type: string
+          example: 'Something went wrong, {error name}'
+          description: Message of error
+    StandartSuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: 'ok'
+          description: Status of query
+        message:
+          type: string
+          example: 'All good'
+          description: Message of success
+    Category:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        title:
+          type: string
+          example: 'Bowls'
+        description:
+          type: string
+          example: 'Bowls for pets'
+    Producer:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        title:
+          type: string
+          example: 'ABBA'
+        description:
+          type: string
+          example: 'Bowls producer'
+        website:
+          type: string
+          example: 'http://abba.com/'
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
+    Type:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        title:
+          type: string
+          example: 'Cats'
+        description:
+          type: string
+          example: 'Cats type'
+    AccountLevel:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        level:
+          type: number
+          example: 0
+        description:
+          type: string
+          example: 'Default'
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        surname:
+          type: string
+          example: 'Schedrovskiy'
+        name:
+          type: string
+          example: 'Ivan'
+        email:
+          type: string
+          example: 'ivamschedrovskiy@gmail.com'
+        phone:
+          type: string
+          example: '0957409451'
+        password:
+          type: string
+          example: 'admin'
+        country:
+          type: string
+          example: 'Ukraine'
+        city:
+          type: string
+          example: 'Zaporizhzhia'
+        zipCode:
+          type: number
+          example: 700000
+        address:
+          type: string
+          example: 'Address field'
+        accountAdminLevel:
+          $ref: '#/components/schemas/AccountLevel'
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
+    Reviews:
+      type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/User'
+        comment:
+          type: string
+          example: 'I like it'
+        pluses:
+          type: string
+          example: 'All'
+        minuses:
+          type: string
+          example: 'Undefined minuses'
+        rating:
+          type: number
+          example: 5
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
+
+    ProductsAllInfo:
+      type: object
+      properties:
+        description:
+          type: string
+          example: 'Product description'
+        characteristics:
+          type: string
+          example: 'Product characteristics'
+        reviews:
+          $ref: '#/components/schemas/Reviews'
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
+
+    Product:
+      type: object
+      properties:
+        title:
+          type: object
+          properties:
+            en:
+              type: string
+              example: 'Bowl blue 750ml'
+            ua:
+              type: string
+              example: 'Миска синя 750мл'
+        description:
+          type: object
+          properties:
+            en:
+              type: string
+              example: 'Bowl blue for dogs 750ml'
+            ua:
+              type: string
+              example: 'Миска синя для собак 750мл'
+        price:
+          type: number
+          example: 750
+        stars:
+          type: number
+          example: 4
+        image:
+          type: string
+          example: 'base64 string'
+        type:
+          $ref: '#/components/schemas/Type'
+        category:
+          $ref: '#/components/schemas/Category'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        novelty:
+          type: boolean
+          example: true
+        discount:
+          type: boolean
+          example: false
+        discountValue:
+          type: number
+          example: -1
+        discountPreviousPrice:
+          type: number
+          example: -1
+        allInfo:
+          $ref: '#/components/schemas/ProductsAllInfo'
+        creator:
+          $ref: '#/components/schemas/User'
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
+    Order:
+      type: object
+      properties:
+        user:
+          $ref:
+        product:
+          $ref:
+        count:
+          type: number
+        status:
+          type: string
+        productPrice:
+          type: number
+        address:
+          type: string
+        updatedAt:
+          require: false
+          type: string
+          format: date-time
+          description: Last updated date and time
+          example: '2022-12-30T12:00:00Z'
+        createdAt:
+          require: false
+          type: string
+          format: date-time
+          description: Created date and time
+          example: '2022-11-30T12:00:00Z'
