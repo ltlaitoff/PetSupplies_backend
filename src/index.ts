@@ -10,10 +10,10 @@ import {
 	AccountLevelRouter,
 	CategoriesRouter,
 	ProducerRouter,
+	TypesRouter,
 } from './routes'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import { TypesRouter } from './routes/types'
 
 console.log(new mongoose.Types.ObjectId('638387eb6f33fac689be5e82'))
 

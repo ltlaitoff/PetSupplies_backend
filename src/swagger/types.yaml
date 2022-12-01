@@ -1,0 +1,134 @@
+/type/all:
+  get:
+    tags: [Types]
+    summary: Get all types
+    responses:
+      '200':
+        description: A Array of JSON Types
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Type'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/type:
+  get:
+    tags: [Types]
+    summary: Get a type by query params
+    parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON Type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  post:
+    tags: [Types]
+    summary: Add a new type
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Type'
+    responses:
+      '200':
+        description: A JSON Type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [Types]
+    summary: Update type info
+    parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON Type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
+/type/{_id}:
+  delete:
+    tags: [Types]
+    summary: Delete type
+    parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'Type {_id} successfully deleted'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
