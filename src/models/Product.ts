@@ -22,7 +22,7 @@ const productSchema = new Schema(
 		novelty: { type: Boolean, default: false },
 		discount: { type: Boolean, default: false },
 		discountValue: { type: Number, default: -1 },
-		discountPreviousValue: { type: Number, default: -1 },
+		discountPreviousPrice: { type: Number, default: -1 },
 		allInfo: { type: Schema.Types.ObjectId, ref: ProductsAllInfo },
 		creator: { type: Schema.Types.ObjectId, ref: User },
 	},
@@ -31,26 +31,8 @@ const productSchema = new Schema(
 	}
 )
 
-allFieldsRequiredByDefault(productSchema)
+// allFieldsRequiredByDefault(productSchema)
 
 const Product = model('Product', productSchema)
 
 export { Product }
-
-// cardSchema.pre('save', function (next) {
-// 	if (this.type !== 'Dogs' && this.type !== 'Cats') {
-// 		throw new Error('Not valid card type')
-// 	}
-
-// 	if (this.price < 0) {
-// 		throw new Error('Not valid card price')
-// 	}
-
-// 	if (this.stars < 0 || this.stars > 5) {
-// 		throw new Error('Not valid card stars')
-// 	}
-
-// 	// TODO: Save images
-
-// 	next()
-// })

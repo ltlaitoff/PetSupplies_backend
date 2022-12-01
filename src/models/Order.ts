@@ -1,12 +1,15 @@
 import { Schema, model } from 'mongoose'
 import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 import { User } from '.'
+import { Product } from './Product'
 
 const orderSchema = new Schema(
 	{
 		user: { type: Schema.Types.ObjectId, ref: User },
-		product: String,
+		product: { type: Schema.Types.ObjectId, ref: Product },
 		count: String,
+		productPrice: Number,
+		address: String,
 		status: String,
 	},
 	{
@@ -14,7 +17,7 @@ const orderSchema = new Schema(
 	}
 )
 
-allFieldsRequiredByDefault(orderSchema)
+// allFieldsRequiredByDefault(orderSchema)
 
 const Order = model('Order', orderSchema)
 
