@@ -1,0 +1,141 @@
+/producer/all:
+  get:
+    tags: [Producers]
+    summary: Get all producers
+    responses:
+      '200':
+        description: A Array of JSON objects containing _id, title and description, website, createdAt and updatedAt
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Producer'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/producer:
+  get:
+    tags: [Producers]
+    summary: Get a type by query params
+    parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: website
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON object containing _id, title and description, website, createdAt and updatedAt
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  post:
+    tags: [Producers]
+    summary: Add a new producer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Producer'
+    responses:
+      '200':
+        description: A JSON object containing _id, title and description, website, createdAt and updatedAt
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [Producers]
+    summary: Update producer info
+    parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: website
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON object containing _id, title and description, website, createdAt and updatedAt
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/producer/{_id}:
+  delete:
+    tags: [Producers]
+    summary: Delete producer
+    parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'Producer {_id} successfully deleted'
+                  description: Message of success
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'

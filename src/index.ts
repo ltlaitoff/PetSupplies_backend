@@ -5,11 +5,15 @@ import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
 
-import { HomeRouter, AccountLevelRouter, CategoriesRouter } from './routes'
+import {
+	HomeRouter,
+	AccountLevelRouter,
+	CategoriesRouter,
+	ProducerRouter,
+} from './routes'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import { TypesRouter } from './routes/types'
-import { ProducerRouter } from './routes/producers'
 
 console.log(new mongoose.Types.ObjectId('638387eb6f33fac689be5e82'))
 
