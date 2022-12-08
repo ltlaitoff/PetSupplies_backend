@@ -104,6 +104,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
   delete:
     tags: [User]
     summary: Delete user
@@ -135,6 +139,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
   put:
     tags: [User]
     summary: Update user info
@@ -166,6 +174,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
 
 /user/checkPassword:
   get:

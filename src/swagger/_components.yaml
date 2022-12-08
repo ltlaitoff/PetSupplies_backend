@@ -284,3 +284,22 @@ components:
       _id: '638785594eb73fc2e0a4e07c'
       level: 0
       description: 'Default'
+
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      type: object
+      properties:
+        status:
+          type: string
+          example: 'error'
+          description: Status of query
+        message:
+          type: string
+          example: 'Something went wrong, {error name}'
+          description: Message of error
+
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

@@ -70,6 +70,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
   put:
     tags: [AccountLevel]
     summary: Update accountLevel info
@@ -100,6 +104,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
 
 /accountLevel/{_id}:
   delete:
@@ -133,3 +141,7 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []

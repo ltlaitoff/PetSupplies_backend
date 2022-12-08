@@ -10,7 +10,7 @@
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Reviews'
+                $ref: '#/components/schemas/Order'
       '500':
         description: Standart error message
         content:

@@ -73,6 +73,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
   put:
     tags: [Producers]
     summary: Update producer info
@@ -107,6 +111,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
 /producer/{_id}:
   delete:
     tags: [Producers]
@@ -139,3 +147,7 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
