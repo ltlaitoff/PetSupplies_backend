@@ -4,16 +4,16 @@ import { AccountLevel } from './AccountLevel'
 
 const userSchema = new Schema(
 	{
-		surname: String,
-		name: String,
-		email: String,
-		phone: String,
-		password: String,
-		country: String,
-		city: String,
-		zipCode: Number,
-		address: String,
-		accountAdminLevel: { type: Schema.Types.ObjectId, ref: AccountLevel },
+		surname: { type: String, required: true },
+		name: { type: String, required: true },
+		email: { type: String, required: true },
+		phone: { type: String, required: true },
+		password: { type: String, required: true },
+		country: { type: String, required: true },
+		city: { type: String, required: true },
+		zipCode: { type: Number, required: true },
+		address: { type: String, required: true },
+		accountAdminLevel: { type: Schema.Types.ObjectId, ref: AccountLevel, required: true },
 	},
 	{
 		timestamps: true,

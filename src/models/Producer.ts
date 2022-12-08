@@ -3,9 +3,9 @@ import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault
 
 const producerSchema = new Schema(
 	{
-		title: String,
-		description: String,
-		website: String,
+		title: { type: String, required: true },
+		description: { type: String, required: true },
+		website: { type: String, required: true },
 	},
 	{
 		timestamps: true,

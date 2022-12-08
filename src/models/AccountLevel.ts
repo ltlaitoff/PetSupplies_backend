@@ -2,8 +2,8 @@ import { Schema, model } from 'mongoose'
 import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 
 const accountLevelSchema = new Schema({
-	level: Number,
-	description: String,
+	level: { type: Number, required: true },
+	description: { type: String, required: true },
 })
 
 allFieldsRequiredByDefault(accountLevelSchema)

@@ -5,9 +5,10 @@ import { User } from './User'
 const rewiewsSchema = new Schema(
 	{
 		author: { type: Schema.Types.ObjectId, ref: User },
-		pluses: String,
-		minuses: String,
-		rating: Number,
+		comment: { type: String, required: true },
+		pluses: { type: String, required: true },
+		minuses: { type: String, required: true },
+		rating: { type: Number, required: true },
 	},
 	{
 		timestamps: true,
