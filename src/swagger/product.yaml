@@ -1,0 +1,188 @@
+/product/all:
+  get:
+    tags: [Product]
+    summary: Get all products
+    responses:
+      '200':
+        description: A Array of JSON Product
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/product:
+  get:
+    tags: [Product]
+    summary: Get a product by query params
+
+    parameters:
+      - in: query
+        name: titleEn
+        schema:
+          type: string
+      - in: query
+        name: titleUa
+        schema:
+          type: string
+      - in: query
+        name: descriptionEn
+        schema:
+          type: string
+      - in: query
+        name: descriptionUa
+        schema:
+          type: string
+      - in: query
+        name: price
+        schema:
+          type: number
+      - in: query
+        name: stars
+        schema:
+          type: string
+      - in: query
+        name: image
+        schema:
+          type: string
+      - in: query
+        name: Type
+        schema:
+          $ref: '#/components/schemas/Type'
+      - in: query
+        name: Category
+        schema:
+          $ref: '#/components/schemas/Category'
+      - in: query
+        name: Producer
+        schema:
+          $ref: '#/components/schemas/Producer'
+      - in: query
+        name: novelty
+        schema:
+          type: boolean
+      - in: query
+        name: discount
+        schema:
+          type: boolean
+      - in: query
+        name: discountValue
+        schema:
+          type: number
+      - in: query
+        name: discountPreviousPrice
+        schema:
+          type: number
+      - in: query
+        name: allInfo
+        schema:
+          $ref: '#/components/schemas/ProductsAllInfo'
+      - in: query
+        name: creator
+        schema:
+          $ref: '#/components/schemas/User'
+
+    responses:
+      '200':
+        description: A JSON Product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  post:
+    tags: [Product]
+    summary: Add a new product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+    responses:
+      '200':
+        description: A JSON Type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [Product]
+    summary: Update type info
+    parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON Type
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Type'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
+/type/{_id}:
+  delete:
+    tags: [Product]
+    summary: Delete product
+    parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'Type {_id} successfully deleted'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'

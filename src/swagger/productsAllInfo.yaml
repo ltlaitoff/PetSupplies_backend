@@ -1,0 +1,92 @@
+/productAllInfo:
+  get:
+    tags: [ProductsAllInfo]
+    summary: Get a product all info by query params
+    parameters:
+      - in: query
+        name: productId
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON ProductsAllInfo
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsAllInfo'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [ProductsAllInfo]
+    summary: Update product all info
+    parameters:
+      - in: query
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: description
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: characteristics
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON Product All Info
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsAllInfo'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
+/productAllInfo/addReview:
+  put:
+    tags: [ProductsAllInfo]
+    summary: Add review
+    parameters:
+      - in: query
+        name: productId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: reviewId
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query
+                message:
+                  type: string
+                  example: 'Review {reviewId} successfully added in {productId}'
+                  description: Message of success
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'

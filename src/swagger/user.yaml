@@ -1,0 +1,246 @@
+/user:
+  get:
+    tags: [User]
+    summary: Get a user
+    parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+      - in: query
+        name: surname
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: email
+        schema:
+          type: string
+      - in: query
+        name: phone
+        schema:
+          type: string
+      - in: query
+        name: country
+        schema:
+          type: string
+      - in: query
+        name: city
+        schema:
+          type: string
+      - in: query
+        name: zipCode
+        schema:
+          type: number
+      - in: query
+        name: address
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON object User
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              _id: '638785594eb73fc2e0a4e07c'
+              surname: 'Schedrovskiy'
+              name: 'Ivan'
+              email: 'ivamschedrovskiy@gmail.com'
+              phone: '0957409451'
+              country: 'Ukraine'
+              city: 'Zaporizhzhia'
+              zipCode: 700000
+              address: 'Address field'
+              accountAdminLevel:
+                $ref: '#/components/examples/AccountLevelDefault'
+              updatedAt: '2022-12-30T12:00:00Z'
+              createdAt: '2022-11-30T12:00:00Z'
+
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  post:
+    tags: [User]
+    summary: Add a new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    responses:
+      '200':
+        description: A JSON object User
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              _id: '638785594eb73fc2e0a4e07c'
+              surname: 'Schedrovskiy'
+              name: 'Ivan'
+              email: 'ivamschedrovskiy@gmail.com'
+              phone: '0957409451'
+              country: 'Ukraine'
+              city: 'Zaporizhzhia'
+              zipCode: 700000
+              address: 'Address field'
+              accountAdminLevel:
+                $ref: '#/components/examples/AccountLevelDefault'
+              updatedAt: '2022-12-30T12:00:00Z'
+              createdAt: '2022-11-30T12:00:00Z'
+
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  delete:
+    tags: [User]
+    summary: Delete user
+    parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'Type {_id} successfully deleted'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [User]
+    summary: Update user info
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'User {_id} successfully updated'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
+/user/checkPassword:
+  get:
+    tags: [User]
+    summary: Check user password
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+                require: true
+              oldPassword:
+                type: string
+                require: true
+              newPassword:
+                type: string
+                require: true
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'User {_id} password successfully updated'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
+/user/all:
+  get:
+    tags: [User]
+    summary: Get all users
+    responses:
+      '200':
+        description: A Array of JSON objects User
+        content:
+          type: array
+          items:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                _id: '638785594eb73fc2e0a4e07c'
+                surname: 'Schedrovskiy'
+                name: 'Ivan'
+                email: 'ivamschedrovskiy@gmail.com'
+                phone: '0957409451'
+                country: 'Ukraine'
+                city: 'Zaporizhzhia'
+                zipCode: 700000
+                address: 'Address field'
+                accountAdminLevel:
+                  $ref: '#/components/examples/AccountLevelDefault'
+                updatedAt: '2022-12-30T12:00:00Z'
+                createdAt: '2022-11-30T12:00:00Z'
+
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'

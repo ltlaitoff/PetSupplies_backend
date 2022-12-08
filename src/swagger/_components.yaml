@@ -172,7 +172,9 @@ components:
           type: string
           example: 'Product characteristics'
         reviews:
-          $ref: '#/components/schemas/Reviews'
+          type: array
+          items:
+            $ref: '#/components/schemas/Reviews'
         updatedAt:
           require: false
           type: string
@@ -277,3 +279,8 @@ components:
           format: date-time
           description: Created date and time
           example: '2022-11-30T12:00:00Z'
+  examples:
+    AccountLevelDefault:
+      _id: '638785594eb73fc2e0a4e07c'
+      level: 0
+      description: 'Default'

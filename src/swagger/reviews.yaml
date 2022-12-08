@@ -1,0 +1,145 @@
+/reviews/all:
+  get:
+    tags: [Reviews]
+    summary: Get all reviews
+    responses:
+      '200':
+        description: A Array of JSON Reviews
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Reviews'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/reviews:
+  get:
+    tags: [Reviews]
+    summary: Get a review by query params
+    parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+      - in: query
+        name: title
+        schema:
+          type: string
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: website
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A JSON Review
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reviews'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  post:
+    tags: [Reviews]
+    summary: Add a new review
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Reviews'
+    responses:
+      '200':
+        description: A JSON Review
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reviews'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+  put:
+    tags: [Reviews]
+    summary: Update review info
+    parameters:
+      - in: query
+        name: author
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: comment
+        schema:
+          type: string
+      - in: query
+        name: pluses
+        schema:
+          type: string
+      - in: query
+        name: minuses
+        schema:
+          type: string
+      - in: query
+        name: rating
+        schema:
+          type: number
+    responses:
+      '200':
+        description: A JSON Review
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reviews'
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+/reviews/{_id}:
+  delete:
+    tags: [Reviews]
+    summary: Delete review
+    parameters:
+      - in: path
+        name: _id
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'Producer {_id} successfully deleted'
+                  description: Message of success
+      '500':
+        description: Standart error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
