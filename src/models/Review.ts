@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose'
-import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 import { User } from './User'
 
 const rewiewsSchema = new Schema(
@@ -14,8 +13,6 @@ const rewiewsSchema = new Schema(
 		timestamps: true,
 	}
 )
-
-allFieldsRequiredByDefault(rewiewsSchema)
 
 const Review = model('Review', rewiewsSchema)
 

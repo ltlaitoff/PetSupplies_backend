@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose'
-import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 
 import { Category, Producer, ProductsAllInfo, Type, User } from '.'
 
@@ -23,15 +22,17 @@ const productSchema = new Schema(
 		discount: { type: Boolean, default: false, required: true },
 		discountValue: { type: Number, default: -1, required: true },
 		discountPreviousPrice: { type: Number, default: -1, required: true },
-		allInfo: { type: Schema.Types.ObjectId, ref: ProductsAllInfo, required: true },
+		allInfo: {
+			type: Schema.Types.ObjectId,
+			ref: ProductsAllInfo,
+			required: true,
+		},
 		creator: { type: Schema.Types.ObjectId, ref: User, required: true },
 	},
 	{
 		timestamps: true,
 	}
 )
-
-// allFieldsRequiredByDefault(productSchema)
 
 const Product = model('Product', productSchema)
 

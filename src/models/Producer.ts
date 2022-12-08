@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose'
-import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 
 const producerSchema = new Schema(
 	{
@@ -11,8 +10,6 @@ const producerSchema = new Schema(
 		timestamps: true,
 	}
 )
-
-allFieldsRequiredByDefault(producerSchema)
 
 const Producer = model('Producer', producerSchema)
 

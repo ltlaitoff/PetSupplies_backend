@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose'
-import { allFieldsRequiredByDefault } from '../helpers/allFieldRequiredByDefault'
 import { AccountLevel } from './AccountLevel'
 
 const userSchema = new Schema(
@@ -13,14 +12,16 @@ const userSchema = new Schema(
 		city: { type: String, required: true },
 		zipCode: { type: Number, required: true },
 		address: { type: String, required: true },
-		accountAdminLevel: { type: Schema.Types.ObjectId, ref: AccountLevel, required: true },
+		accountAdminLevel: {
+			type: Schema.Types.ObjectId,
+			ref: AccountLevel,
+			required: true,
+		},
 	},
 	{
 		timestamps: true,
 	}
 )
-
-allFieldsRequiredByDefault(userSchema)
 
 const User = model('User', userSchema)
 
