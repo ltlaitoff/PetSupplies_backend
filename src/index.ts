@@ -12,6 +12,8 @@ import {
 	ProducerRouter,
 	TypesRouter,
 	OrdersRouter,
+	// ProductRouter,
+	ReviewRouter,
 } from './routes'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -62,8 +64,9 @@ app.use(CategoriesRouter)
 app.use(TypesRouter)
 app.use(ProducerRouter)
 app.use(AccountLevelRouter)
-
 app.use(OrdersRouter)
+// app.use(ProductRouter)
+app.use(ReviewRouter)
 
 app.listen(port, () => {
 	console.log(`[Server]: Server is running at http://localhost:${port}`)
