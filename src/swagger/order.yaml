@@ -1,10 +1,10 @@
-/reviews/all:
+/order/all:
   get:
     tags: [Order]
     summary: Get all orders
     responses:
       '200':
-        description: A Array of JSON Reviews
+        description: A Array of JSON Orders
         content:
           application/json:
             schema:
@@ -17,25 +17,37 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
-/reviews:
+/order:
   get:
     tags: [Order]
-    summary: Get a review by query params
+    summary: Get a order by query params
     parameters:
       - in: query
         name: id
         schema:
           type: string
       - in: query
-        name: title
+        name: user
         schema:
           type: string
       - in: query
-        name: description
+        name: product
         schema:
           type: string
       - in: query
-        name: website
+        name: count
+        schema:
+          type: number
+      - in: query
+        name: productPrice
+        schema:
+          type: number
+      - in: query
+        name: address
+        schema:
+          type: string
+      - in: query
+        name: status
         schema:
           type: string
     responses:
@@ -44,7 +56,7 @@
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reviews'
+              $ref: '#/components/schemas/Order'
       '500':
         description: Standart error message
         content:
@@ -53,68 +65,79 @@
               $ref: '#/components/schemas/StandartErrorMessage'
   post:
     tags: [Order]
-    summary: Add a new review
+    summary: Add a new order
     requestBody:
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Reviews'
+            $ref: '#/components/schemas/Order'
     responses:
       '200':
         description: A JSON Review
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reviews'
+              $ref: '#/components/schemas/Order'
       '500':
         description: Standart error message
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
   put:
     tags: [Order]
-    summary: Update review info
+    summary: Update order info
     parameters:
       - in: query
-        name: author
-        required: true
+        name: user
         schema:
           type: string
       - in: query
-        name: comment
+        name: product
         schema:
           type: string
       - in: query
-        name: pluses
-        schema:
-          type: string
-      - in: query
-        name: minuses
-        schema:
-          type: string
-      - in: query
-        name: rating
+        name: count
         schema:
           type: number
+      - in: query
+        name: productPrice
+        schema:
+          type: number
+      - in: query
+        name: address
+        schema:
+          type: string
+      - in: query
+        name: status
+        schema:
+          type: string
     responses:
       '200':
-        description: A JSON Review
+        description: A JSON Order
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Reviews'
+              $ref: '#/components/schemas/Order'
       '500':
         description: Standart error message
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
-/reviews/{_id}:
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
+/order/{_id}:
   delete:
     tags: [Order]
-    summary: Delete review
+    summary: Delete order
     parameters:
       - in: path
         name: _id
@@ -143,3 +166,7 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []

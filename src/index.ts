@@ -11,6 +11,7 @@ import {
 	CategoriesRouter,
 	ProducerRouter,
 	TypesRouter,
+	OrdersRouter,
 } from './routes'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -25,6 +26,7 @@ connect(
 	.then(() => {
 		console.log('[Server]: DB connected')
 	})
+
 	.catch(err => {
 		console.error('[Server]: DB error connect', err)
 	})
@@ -60,6 +62,8 @@ app.use(CategoriesRouter)
 app.use(TypesRouter)
 app.use(ProducerRouter)
 app.use(AccountLevelRouter)
+
+app.use(OrdersRouter)
 
 app.listen(port, () => {
 	console.log(`[Server]: Server is running at http://localhost:${port}`)
