@@ -82,6 +82,8 @@ export const createNewReview = async (req: Request, res: Response) => {
 
 	// TODO: Add check on admin level 2
 
+	// TODO: Add check user exists
+
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)
 	}
