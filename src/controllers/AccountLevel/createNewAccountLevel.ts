@@ -4,6 +4,7 @@ import { AccountLevel } from '../../models'
 import { Status, ErrorMessageAnswer, Codes } from '../../types'
 import { createErrorMessage } from '../../helpers/messages'
 import { getValidParamsWithCheckID } from '../../helpers/getValidParams'
+import { checkQueryObjectIdWithUndefined } from '../../helpers/checkQuery'
 
 type getQueryParamsOk = {
 	status: Status.OK
@@ -19,18 +20,10 @@ const getQueryParams = (
 ): ErrorMessageAnswer | getQueryParamsOk => {
 	const { _id, level, description } = body
 
-	let resultId: undefined | Types.ObjectId = undefined
+	const resultId = checkQueryObjectIdWithUndefined(_id)
 
-	if (_id !== undefined) {
-		if (typeof _id !== 'string') {
-			return createErrorMessage('Id must be undefined | string')
-		}
-
-		if (!Types.ObjectId.isValid(_id)) {
-			return createErrorMessage('Id string must be ObjectId isValid')
-		}
-
-		resultId = new Types.ObjectId(_id)
+	if (resultId.status === Status.ERROR) {
+		return resultId
 	}
 
 	if (typeof description !== 'string') {
@@ -47,7 +40,7 @@ const getQueryParams = (
 
 	return {
 		status: Status.OK,
-		value: { id: resultId, level: resultLevel, description },
+		value: { id: resultId.value, level: resultLevel, description },
 	}
 }
 
