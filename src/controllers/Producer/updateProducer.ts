@@ -61,6 +61,8 @@ export const updateProducer = async (req: Request, res: Response) => {
 		return res.status(Codes.ERROR).json(params)
 	}
 
+	// TODO: Add check on admin level 2
+
 	const { id, title, description, website } = params.value
 
 	const updatedParams = getValidParamsWithCheckAll({
