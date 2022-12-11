@@ -20,7 +20,7 @@ const getQueryParams = (
 	const { id, title, description } = req.query
 
 	if (typeof id !== 'string') {
-		return createErrorMessage('Id must be undefined | string')
+		return createErrorMessage('Id must be string')
 	}
 
 	if (!Types.ObjectId.isValid(id)) {
@@ -53,6 +53,8 @@ export const updateCategory = async (req: Request, res: Response) => {
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)
 	}
+
+	// TODO: Add check on admin level 2
 
 	const { id, title, description } = params.value
 

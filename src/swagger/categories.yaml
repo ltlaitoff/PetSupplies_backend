@@ -1,7 +1,27 @@
+/categories/all:
+  get:
+    tags: [Categories]
+    summary: Get a all categories
+    responses:
+      '200':
+        description: A Array of JSON Categories
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Category'
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+
 /categories:
   get:
     tags: [Categories]
-    summary: Get a categories by query params
+    summary: Get a category by query params
     parameters:
       - in: query
         name: id
@@ -17,13 +37,11 @@
           type: string
     responses:
       '200':
-        description: A Array of JSON Categories
+        description: A JSON of Categories
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Category'
+              $ref: '#/components/schemas/Category'
       '500':
         description: Error message
         content:

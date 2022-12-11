@@ -9,7 +9,8 @@ import {
 
 export const deleteCategory = (req: Request, res: Response) => {
 	const id = req.params._id
-	console.log('id:', id)
+
+	// TODO: Add check on admin level 2
 
 	if (typeof id !== 'string') {
 		return createErrorMessage('Id must be string')

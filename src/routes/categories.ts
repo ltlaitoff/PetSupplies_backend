@@ -2,6 +2,7 @@ import Router, { Request, Response } from 'express'
 import {
 	createNewCategory,
 	deleteCategory,
+	getAllCategories,
 	getCategories,
 	updateCategory,
 } from '../controllers/Category'
@@ -13,9 +14,10 @@ CategoriesRouter.use((req: Request, res: Response, next) => {
 	next()
 })
 
+CategoriesRouter.get('/categories/all', getAllCategories)
 CategoriesRouter.get('/categories', getCategories)
 CategoriesRouter.post('/categories', createNewCategory)
-CategoriesRouter.delete('/categories/:_id', deleteCategory)
 CategoriesRouter.put('/categories', updateCategory)
+CategoriesRouter.delete('/categories/:_id', deleteCategory)
 
 export { CategoriesRouter }
