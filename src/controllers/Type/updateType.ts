@@ -50,6 +50,8 @@ const getQueryParams = (
 export const updateType = async (req: Request, res: Response) => {
 	const params = getQueryParams(req)
 
+	// TODO: Add check on admin level 2
+
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)
 	}
