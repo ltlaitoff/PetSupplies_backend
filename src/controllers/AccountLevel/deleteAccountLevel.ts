@@ -10,6 +10,8 @@ import {
 export const deleteAccountLevel = (req: Request, res: Response) => {
 	const id = req.params._id
 
+	// TODO: Add check on admin level 2
+
 	if (typeof id !== 'string') {
 		return createErrorMessage('Id must be string')
 	}

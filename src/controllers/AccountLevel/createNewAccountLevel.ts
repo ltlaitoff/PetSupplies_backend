@@ -39,22 +39,22 @@ const getQueryParams = (
 
 	let resultLevel: number | undefined = undefined
 
-	if (level !== undefined) {
-		if (Number(level) === NaN) {
-			return createErrorMessage('Level must be number | undefined')
-		}
+	resultLevel = Number(level)
 
-		resultLevel = Number(level)
+	if (resultLevel === undefined || resultLevel === NaN) {
+		return createErrorMessage('Level must be number | undefined')
 	}
 
 	return {
 		status: Status.OK,
-		value: { id: resultId, level, description },
+		value: { id: resultId, level: resultLevel, description },
 	}
 }
 
 export const createNewAccountLevel = async (req: Request, res: Response) => {
 	const params = getQueryParams(req.body)
+
+	// TODO: Add check on admin level 2
 
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)
