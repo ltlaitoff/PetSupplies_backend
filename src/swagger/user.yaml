@@ -51,13 +51,14 @@
               surname: 'Schedrovskiy'
               name: 'Ivan'
               email: 'ivamschedrovskiy@gmail.com'
-              phone: '0957409451'
               country: 'Ukraine'
               city: 'Zaporizhzhia'
               zipCode: 700000
               address: 'Address field'
               accountAdminLevel:
-                $ref: '#/components/examples/AccountLevelDefault'
+                _id: '638785594eb73fc2e0a4e07c'
+                level: 0
+                description: 'Default'
               updatedAt: '2022-12-30T12:00:00Z'
               createdAt: '2022-11-30T12:00:00Z'
 
@@ -67,6 +68,19 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '404':
+        description: User not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'error'
+                message:
+                  type: string
+                  example: 'User not found'
   post:
     tags: [User]
     summary: Add a new user
@@ -88,13 +102,14 @@
               surname: 'Schedrovskiy'
               name: 'Ivan'
               email: 'ivamschedrovskiy@gmail.com'
-              phone: '0957409451'
               country: 'Ukraine'
               city: 'Zaporizhzhia'
               zipCode: 700000
               address: 'Address field'
               accountAdminLevel:
-                $ref: '#/components/examples/AccountLevelDefault'
+                _id: '638785594eb73fc2e0a4e07c'
+                level: 0
+                description: 'Default'
               updatedAt: '2022-12-30T12:00:00Z'
               createdAt: '2022-11-30T12:00:00Z'
 
@@ -108,6 +123,88 @@
         $ref: '#/components/responses/UnauthorizedError'
     security:
       - BasicAuth: []
+  put:
+    tags: [User]
+    summary: Update user info
+    parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: surname
+        schema:
+          type: string
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: email
+        schema:
+          type: string
+      - in: query
+        name: country
+        schema:
+          type: string
+      - in: query
+        name: city
+        schema:
+          type: string
+      - in: query
+        name: zipCode
+        schema:
+          type: number
+      - in: query
+        name: address
+        schema:
+          type: string
+      - in: query
+        name: accountAdminLevel
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'ok'
+                  description: Status of query = OK
+                message:
+                  type: string
+                  example: 'User {_id} successfully updated'
+                  description: Message of success
+      '500':
+        description: Error message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+      '404':
+        description: User not found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: 'error'
+                message:
+                  type: string
+                  example: 'User not found'
+    security:
+      - BasicAuth: []
+
+/user/{_id}:
   delete:
     tags: [User]
     summary: Delete user
@@ -143,46 +240,11 @@
         $ref: '#/components/responses/UnauthorizedError'
     security:
       - BasicAuth: []
+
+/user/changePassword:
   put:
     tags: [User]
-    summary: Update user info
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
-    responses:
-      '200':
-        description: Success
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: 'ok'
-                  description: Status of query = OK
-                message:
-                  type: string
-                  example: 'User {_id} successfully updated'
-                  description: Message of success
-      '500':
-        description: Error message
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StandartErrorMessage'
-      '401':
-        $ref: '#/components/responses/UnauthorizedError'
-    security:
-      - BasicAuth: []
-
-/user/checkPassword:
-  get:
-    tags: [User]
-    summary: Check user password
+    summary: Change user password
     requestBody:
       required: true
       content:
@@ -221,6 +283,10 @@
           application/json:
             schema:
               $ref: '#/components/schemas/StandartErrorMessage'
+      '401':
+        $ref: '#/components/responses/UnauthorizedError'
+    security:
+      - BasicAuth: []
 
 /user/all:
   get:
@@ -230,25 +296,28 @@
       '200':
         description: A Array of JSON objects User
         content:
-          type: array
-          items:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              example:
-                _id: '638785594eb73fc2e0a4e07c'
-                surname: 'Schedrovskiy'
-                name: 'Ivan'
-                email: 'ivamschedrovskiy@gmail.com'
-                phone: '0957409451'
-                country: 'Ukraine'
-                city: 'Zaporizhzhia'
-                zipCode: 700000
-                address: 'Address field'
-                accountAdminLevel:
-                  $ref: '#/components/examples/AccountLevelDefault'
-                updatedAt: '2022-12-30T12:00:00Z'
-                createdAt: '2022-11-30T12:00:00Z'
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                schema:
+                  $ref: '#/components/schemas/User'
+                example:
+                  _id: '638785594eb73fc2e0a4e07c'
+                  surname: 'Schedrovskiy'
+                  name: 'Ivan'
+                  email: 'ivamschedrovskiy@gmail.com'
+                  country: 'Ukraine'
+                  city: 'Zaporizhzhia'
+                  zipCode: 700000
+                  address: 'Address field'
+                  accountAdminLevel:
+                    _id: '638785594eb73fc2e0a4e07c'
+                    level: 0
+                    description: 'Default'
+                  updatedAt: '2022-12-30T12:00:00Z'
+                  createdAt: '2022-11-30T12:00:00Z'
 
       '500':
         description: Standart error message

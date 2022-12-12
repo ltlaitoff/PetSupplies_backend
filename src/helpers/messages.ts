@@ -1,7 +1,19 @@
-import { Status, ErrorMessageAnswer, SuccessMessageAnswer } from '../types'
+import {
+	Status,
+	ErrorMessageAnswer,
+	SuccessMessageAnswer,
+	NotFoundMessageAnswer,
+} from '../types'
 
 export const createErrorMessage = (message: string): ErrorMessageAnswer => ({
 	status: Status.ERROR,
+	message: message,
+})
+
+export const createNotFoundMessage = (
+	message: string
+): NotFoundMessageAnswer => ({
+	status: Status.NOT_FOUND,
 	message: message,
 })
 

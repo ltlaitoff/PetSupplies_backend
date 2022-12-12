@@ -15,6 +15,7 @@ import {
 	// ProductRouter,
 	ReviewRouter,
 	ProductAllInfoRouter,
+	UserRouter,
 } from './routes'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -69,6 +70,7 @@ app.use(OrdersRouter)
 // app.use(ProductRouter)
 app.use(ReviewRouter)
 app.use(ProductAllInfoRouter)
+app.use(UserRouter)
 
 app.listen(port, () => {
 	console.log(`[Server]: Server is running at http://localhost:${port}`)
