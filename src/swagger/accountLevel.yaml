@@ -57,6 +57,16 @@
         application/json:
           schema:
             $ref: '#/components/schemas/AccountLevel'
+          examples:
+            WithId:
+              value:
+                _id: '638785594eb73fc2e0a4e07c'
+                level: 0
+                description: 'Default'
+            WithoutId:
+              value:
+                level: 0
+                description: 'Default'
     responses:
       '200':
         description: A JSON object containing _id, level and description
