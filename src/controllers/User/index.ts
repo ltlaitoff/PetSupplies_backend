@@ -1,0 +1,6 @@
+export { getUser } from './getUser'
+export { createNewUser } from './createNewUser'
+export { deleteUser } from './deleteUser'
+export { updateUserInfo } from './updateUserInfo'
+export { changeUserPassword } from './changeUserPassword'
+export { getAllUsers } from './getAllUsers'
