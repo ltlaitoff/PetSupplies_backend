@@ -1,6 +1,6 @@
 import mongoose, { Types } from 'mongoose'
 import { Request, Response } from 'express'
-import { User } from '../../models'
+import { User, AccountLevel } from '../../models'
 import { Status, ErrorMessageAnswer, Codes } from '../../types'
 import { createErrorMessage } from '../../helpers/messages'
 import { getValidParamsWithCheckID } from '../../helpers/getValidParams'
@@ -128,14 +128,55 @@ const getQueryParams = (
 	}
 }
 
+const checkAccountLeveelIsExists = async (
+	id: Types.ObjectId
+): Promise<boolean> => {
+	const result = await AccountLevel.findOne({ _id: id })
+
+	return result !== null
+}
+
 export const createNewUser = async (req: Request, res: Response) => {
 	const params = getQueryParams(req.body)
 
-	// TODO: Add check on admin level 2
-	// TODO: default accountLevelId
-
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)
+	}
+
+	if (params.value.accountAdminLevel) {
+		if (
+			(await checkAccountLeveelIsExists(params.value.accountAdminLevel)) ===
+			false
+		) {
+			return res
+				.status(Codes.NOT_FOUND)
+				.json(createErrorMessage('AccountLevel id is not valid'))
+		}
+	} else {
+		const defaultAccountLevel = await AccountLevel.findOne({ level: 0 })
+
+		if (defaultAccountLevel === null) {
+			return res
+				.status(Codes.ERROR)
+				.json(createErrorMessage('Something went wrong'))
+		}
+
+		params.value.accountAdminLevel = defaultAccountLevel._id
+	}
+
+	const userCheckEmailExists = await User.findOne({
+		email: params.value.email,
+		phone: params.value.phone,
+	})
+
+	if (userCheckEmailExists !== null) {
+		return res
+			.status(Codes.ERROR)
+			.json(
+				createErrorMessage(
+					'A user with such an email or phone is already registered'
+				)
+			)
 	}
 
 	const newCategoryParams = getValidParamsWithCheckID(params.value)
