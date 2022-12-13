@@ -1,0 +1,5 @@
+export { getAllProducts } from './getAllProducts'
+export { deleteProduct } from './deleteProduct'
+export { createNewProduct } from './createNewProduct'
+export { getProduct } from './getProduct'
+export { updateProductInfo } from './updateProductInfo'

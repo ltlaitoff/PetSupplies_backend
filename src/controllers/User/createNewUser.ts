@@ -27,7 +27,7 @@ const getQueryParams = (
 	body: Request['body']
 ): ErrorMessageAnswer | getQueryParamsOk => {
 	const {
-		id,
+		_id,
 		surname,
 		name,
 		email,
@@ -42,16 +42,18 @@ const getQueryParams = (
 
 	let resultId: undefined | Types.ObjectId = undefined
 
-	if (id !== undefined) {
-		if (typeof id !== 'string') {
-			return createErrorMessage('Id must be undefined | string')
+	if (_id !== undefined) {
+		if (typeof _id !== 'string') {
+			return createErrorMessage('_id must be undefined | string')
 		}
 
-		if (!Types.ObjectId.isValid(id)) {
-			return createErrorMessage('Id string must be ObjectId.isValid')
+		if (!Types.ObjectId.isValid(_id)) {
+			return createErrorMessage('_id string must be ObjectId.isValid')
 		}
 
-		resultId = new Types.ObjectId(id)
+		console.log(_id, new Types.ObjectId(_id))
+
+		resultId = new Types.ObjectId(_id)
 	}
 
 	if (typeof surname !== 'string') {
@@ -105,7 +107,7 @@ const getQueryParams = (
 			)
 		}
 
-		resultAccountAdminLevelId = new Types.ObjectId(id)
+		resultAccountAdminLevelId = new Types.ObjectId(accountAdminLevel)
 	}
 
 	return {
@@ -130,6 +132,7 @@ export const createNewUser = async (req: Request, res: Response) => {
 	const params = getQueryParams(req.body)
 
 	// TODO: Add check on admin level 2
+	// TODO: default accountLevelId
 
 	if (params.status === Status.ERROR) {
 		return res.status(Codes.ERROR).json(params)

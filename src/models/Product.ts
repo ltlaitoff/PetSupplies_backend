@@ -14,7 +14,7 @@ const productSchema = new Schema(
 		},
 		price: { type: Number, required: true },
 		stars: { type: Number, required: true },
-		image: { type: Buffer, contentType: String, required: true },
+		image: { type: String, required: true },
 		type: { type: [Schema.Types.ObjectId], ref: Type, required: true },
 		category: { type: [Schema.Types.ObjectId], ref: Category, required: true },
 		producer: { type: Schema.Types.ObjectId, ref: Producer, required: true },

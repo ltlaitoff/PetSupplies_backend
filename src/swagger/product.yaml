@@ -24,19 +24,23 @@
 
     parameters:
       - in: query
-        name: titleEn
+        name: id
         schema:
           type: string
       - in: query
-        name: titleUa
+        name: titleEN
         schema:
           type: string
       - in: query
-        name: descriptionEn
+        name: titleUA
         schema:
           type: string
       - in: query
-        name: descriptionUa
+        name: descriptionEN
+        schema:
+          type: string
+      - in: query
+        name: descriptionUA
         schema:
           type: string
       - in: query
@@ -54,15 +58,19 @@
       - in: query
         name: Type
         schema:
-          $ref: '#/components/schemas/Type'
+          type: array
+          items:
+            type: string
       - in: query
         name: Category
         schema:
-          $ref: '#/components/schemas/Category'
+          type: array
+          items:
+            type: string
       - in: query
         name: Producer
         schema:
-          $ref: '#/components/schemas/Producer'
+          type: string
       - in: query
         name: novelty
         schema:
@@ -80,13 +88,9 @@
         schema:
           type: number
       - in: query
-        name: allInfo
-        schema:
-          $ref: '#/components/schemas/ProductsAllInfo'
-      - in: query
         name: creator
         schema:
-          $ref: '#/components/schemas/User'
+          type: string
 
     responses:
       '200':
@@ -109,7 +113,43 @@
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/ProductPostBodyMinimal'
+          examples:
+            AllInfo:
+              value:
+                title: { en: 'Bowl blue 750ml', ua: 'Миска синя 750мл' }
+                description:
+                  {
+                    en: 'Bowl blue for dogs 750ml',
+                    ua: 'Миска синя для собак 750мл',
+                  }
+                price: 750
+                stars: 4
+                iamge: 'http://example.com/image.png'
+                category: ['638785594eb73fc2e0a4e07c']
+                type: ['638785594eb73fc2e0a4e07c']
+                producer: '638785594eb73fc2e0a4e07c'
+                novelty: true
+                discount: false
+                discountValue: -1
+                discountPreviousPrice: -1
+                creator: '638785594eb73fc2e0a4e07c'
+            Minimal:
+              value:
+                title: { en: 'Bowl blue 750ml', ua: 'Миска синя 750мл' }
+                description:
+                  {
+                    en: 'Bowl blue for dogs 750ml',
+                    ua: 'Миска синя для собак 750мл',
+                  }
+                price: 400
+                stars: 5
+                iamge: 'http://example.com/image.png'
+                category: ['638785594eb73fc2e0a4e07c']
+                type: ['638785594eb73fc2e0a4e07c']
+                producer: '638785594eb73fc2e0a4e07c'
+                creator: '638785594eb73fc2e0a4e07c'
+
     responses:
       '200':
         description: A JSON Type
@@ -137,20 +177,69 @@
         schema:
           type: string
       - in: query
-        name: title
+        name: titleEN
         schema:
           type: string
       - in: query
-        name: description
+        name: titleUA
         schema:
           type: string
+      - in: query
+        name: descriptionEN
+        schema:
+          type: string
+      - in: query
+        name: descriptionUA
+        schema:
+          type: string
+      - in: query
+        name: price
+        schema:
+          type: number
+      - in: query
+        name: stars
+        schema:
+          type: string
+      - in: query
+        name: image
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: category
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: novelty
+        schema:
+          type: boolean
+      - in: query
+        name: discount
+        schema:
+          type: boolean
+      - in: query
+        name: discountValue
+        schema:
+          type: number
+      - in: query
+        name: discountPreviousPrice
+        schema:
+          type: number
+
     responses:
       '200':
         description: A JSON Type
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Type'
+              $ref: '#/components/schemas/Product'
       '500':
         description: Error message
         content:
@@ -162,7 +251,7 @@
     security:
       - BasicAuth: []
 
-/type/{_id}:
+/product/{_id}:
   delete:
     tags: [Product]
     summary: Delete product

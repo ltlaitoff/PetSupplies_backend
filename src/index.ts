@@ -12,7 +12,7 @@ import {
 	ProducerRouter,
 	TypesRouter,
 	OrdersRouter,
-	// ProductRouter,
+	ProductRouter,
 	ReviewRouter,
 	ProductAllInfoRouter,
 	UserRouter,
@@ -67,7 +67,7 @@ app.use(TypesRouter)
 app.use(ProducerRouter)
 app.use(AccountLevelRouter)
 app.use(OrdersRouter)
-// app.use(ProductRouter)
+app.use(ProductRouter)
 app.use(ReviewRouter)
 app.use(ProductAllInfoRouter)
 app.use(UserRouter)

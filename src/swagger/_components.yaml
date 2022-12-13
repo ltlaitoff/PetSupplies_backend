@@ -188,6 +188,137 @@ components:
           description: Created date and time
           example: '2022-11-30T12:00:00Z'
 
+    ProductPostBodyMinimal:
+      type: object
+      properties:
+        title:
+          type: object
+          properties:
+            en:
+              type: string
+              required: true
+              example: 'Bowl blue 750ml'
+            ua:
+              type: string
+              required: true
+              example: 'Миска синя 750мл'
+        description:
+          type: object
+          properties:
+            en:
+              type: string
+              required: true
+              example: 'Bowl blue for dogs 750ml'
+            ua:
+              type: string
+              required: true
+              example: 'Миска синя для собак 750мл'
+        price:
+          type: number
+          required: true
+          example: 750
+        stars:
+          type: number
+          required: true
+          example: 4
+        image:
+          type: string
+          required: true
+          example: 'http://example.com/image.png'
+        type:
+          type: array
+          required: true
+          items:
+            type: string
+            required: true
+            example: '638785594eb73fc2e0a4e07c'
+        category:
+          type: array
+          required: true
+          items:
+            type: string
+            required: true
+            example: '638785594eb73fc2e0a4e07c'
+        producer:
+          type: string
+          required: true
+          example: '638785594eb73fc2e0a4e07c'
+        novelty:
+          type: boolean
+          example: true
+        discount:
+          type: boolean
+          example: false
+        discountValue:
+          type: number
+          example: -1
+        discountPreviousPrice:
+          type: number
+          example: -1
+        creator:
+          type: string
+          required: true
+          example: '638785594eb73fc2e0a4e07c'
+
+    ProductWithoutPopulate:
+      type: object
+      properties:
+        title:
+          type: object
+          properties:
+            en:
+              type: string
+              example: 'Bowl blue 750ml'
+            ua:
+              type: string
+              example: 'Миска синя 750мл'
+        description:
+          type: object
+          properties:
+            en:
+              type: string
+              example: 'Bowl blue for dogs 750ml'
+            ua:
+              type: string
+              example: 'Миска синя для собак 750мл'
+        price:
+          type: number
+          example: 750
+        stars:
+          type: number
+          example: 4
+        image:
+          type: string
+          example: 'http://example.com/image.png'
+        type:
+          type: array
+          items:
+            type: string
+            example: '638785594eb73fc2e0a4e07c'
+        category:
+          type: array
+          items:
+            type: string
+            example: '638785594eb73fc2e0a4e07c'
+        producer:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+        novelty:
+          type: boolean
+          example: true
+        discount:
+          type: boolean
+          example: false
+        discountValue:
+          type: number
+          example: -1
+        discountPreviousPrice:
+          type: number
+          example: -1
+        creator:
+          type: string
+          example: '638785594eb73fc2e0a4e07c'
+
     Product:
       type: object
       properties:
@@ -217,7 +348,7 @@ components:
           example: 4
         image:
           type: string
-          example: 'base64 string'
+          example: 'http://example.com/image.png'
         type:
           $ref: '#/components/schemas/Type'
         category:
