@@ -6,18 +6,38 @@ import {
 	createErrorMessage,
 	createSuccessMessage,
 } from '../../helpers/messages'
+import { getUserAdminLevelByAuthorizaionHeader } from '../helpers/getUserAdminLevel'
 
-export const deleteType = (req: Request, res: Response) => {
+export const deleteType = async (req: Request, res: Response) => {
 	const id = req.params._id
 
-	// TODO: Add check on admin level 2
+	// START CHECK ON ADMIN
+	const ADMIN_LEVEL = 2
+
+	const adminLevel = await getUserAdminLevelByAuthorizaionHeader(
+		req.headers.authorization
+	)
+
+	if (adminLevel.status === Codes.ERROR) {
+		return res.status(Codes.UNAUTHORIZED).json(adminLevel.message)
+	}
+
+	if (adminLevel.value < ADMIN_LEVEL) {
+		return res
+			.status(Codes.NOT_FOUND)
+			.json(createErrorMessage(`User admin level must be equal ${ADMIN_LEVEL}`))
+	}
+
+	// END CHECK ON ADMIN
 
 	if (typeof id !== 'string') {
-		return createErrorMessage('Id must be string')
+		return res.status(Codes.ERROR).json(createErrorMessage('Id must be string'))
 	}
 
 	if (!Types.ObjectId.isValid(id)) {
-		return createErrorMessage('Id string must be ObjectId.isValid')
+		return res
+			.status(Codes.ERROR)
+			.json(createErrorMessage('Id string must be ObjectId.isValid'))
 	}
 
 	const idAsObjectId = new Types.ObjectId(id)

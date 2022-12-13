@@ -138,17 +138,15 @@ export const createNewUser = async (req: Request, res: Response) => {
 		return res.status(Codes.ERROR).json(params)
 	}
 
-	const { id } = params.value
-
 	const newCategoryParams = getValidParamsWithCheckID(params.value)
 
-	new User(newCategoryParams).save(error => {
+	new User(newCategoryParams).save((error, result) => {
 		if (error) {
 			return res
 				.status(Codes.ERROR)
 				.json(createErrorMessage('Something went wrong.' + error.name))
 		}
 
-		getUserInfoResponse({ _id: id }, res)
+		getUserInfoResponse({ _id: result._id }, res)
 	})
 }

@@ -6,11 +6,29 @@ import {
 	createErrorMessage,
 	createSuccessMessage,
 } from '../../helpers/messages'
+import { getUserAdminLevelByAuthorizaionHeader } from '../helpers/getUserAdminLevel'
 
-export const deleteOrder = (req: Request, res: Response) => {
+export const deleteOrder = async (req: Request, res: Response) => {
 	const id = req.params._id
 
-	// TODO: Add check on admin level 2
+	// START CHECK ON ADMIN
+	const ADMIN_LEVEL = 2
+
+	const adminLevel = await getUserAdminLevelByAuthorizaionHeader(
+		req.headers.authorization
+	)
+
+	if (adminLevel.status === Codes.ERROR) {
+		return res.status(Codes.UNAUTHORIZED).json(adminLevel.message)
+	}
+
+	if (adminLevel.value < ADMIN_LEVEL) {
+		return res
+			.status(Codes.NOT_FOUND)
+			.json(createErrorMessage(`User admin level must be equal ${ADMIN_LEVEL}`))
+	}
+
+	// END CHECK ON ADMIN
 
 	if (typeof id !== 'string') {
 		return createErrorMessage('Id must be string')
